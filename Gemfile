@@ -46,6 +46,6 @@ group :development do
 
 gem 'bootstrap-sass'
 
-gem 'devise'
-
 end
+
+gem 'devise'
