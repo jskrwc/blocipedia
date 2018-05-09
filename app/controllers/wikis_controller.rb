@@ -1,7 +1,7 @@
 class WikisController < ApplicationController
-  
+
   def index
-    @wiki = Wikis.all
+    @wikis = Wiki.all
   end
 
   def show
@@ -32,14 +32,14 @@ class WikisController < ApplicationController
   end
 
   def update
-    @wiki = Post.find(params[:id])
+    @wiki = Wiki.find(params[:id])
     @wiki.title = params[:wiki][:title]
     @wiki.body = params[:wiki][:body]
     # @post.assign_attributes(post_params)
 
     if @wiki.save
       flash[:notice] = "The wiki has been succesfully updated."
-      redirect_to [@post.topic, @post]
+      redirect_to @wiki
     else
       flash.now[:alert] = "There was an error updating your wiki. Please try again."
       render :edit
