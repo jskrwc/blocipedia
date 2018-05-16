@@ -18,9 +18,18 @@ class WikisController < ApplicationController
   end
 
   def create
-    @wiki = Wiki.new
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
+    # @wiki = Wiki.new
+    # @wiki.title = params[:wiki][:title]
+    # @wiki.body = params[:wiki][:body]
+
+# #   def create
+# #     # @wiki = Wiki.new
+    # @wiki = current_user.wikis.new(wiki_params)
+    @wiki = Wiki.new(wiki_params)
+# #     # @wiki.title = params[:wiki][:title]
+# #     # @wiki.body = params[:wiki][:body]
+@wiki.user = current_user
+
 
     if wiki.save
       flash[:notice] = "Your Wiki has been created"
@@ -33,11 +42,12 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
-    @wiki.title = params[:wiki][:title]
-    @wiki.body = params[:wiki][:body]
-    # @post.assign_attributes(post_params)
+    # @wiki.title = params[:wiki][:title]
+    # @wiki.body = params[:wiki][:body]
+    # @wiki.assign_attributes(wiki_params)  #not neede bc using @wiki.update(wiki_params) below; use if using @wiki.save below
 
-    if @wiki.save
+    # if @wiki.save
+    if @wiki.update(wiki_params)
       flash[:notice] = "The wiki has been succesfully updated."
       redirect_to @wiki
     else
@@ -58,4 +68,8 @@ class WikisController < ApplicationController
     end
   end
 
+end
+
+def wiki_params
+  params.require(:wiki).permit(:title, :body, :private)
 end

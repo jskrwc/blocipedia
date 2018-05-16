@@ -1,7 +1,15 @@
 require 'rails_helper'
-# include Devise::Test::ControllerHelpers  #put here? or below?
+include RandomData
 
 RSpec.describe WikisController, type: :controller do
+
+  # let(:wiki) {create(:wiki) }
+  let(:user) {create(:user) }
+  let (:wiki) { Wiki.create!(title:RandomData.random_sentence, body:RandomData.random_paragraph, private:false) }
+  #
+  # before do
+  #   sign_in wiki.user
+  # end
 
   describe "GET #index" do
     it "returns http success" do
@@ -12,7 +20,7 @@ RSpec.describe WikisController, type: :controller do
 
   describe "GET #show" do
     it "returns http success" do
-      get :show
+      get :show, params: { id: wiki.id }
       expect(response).to have_http_status(:success)
     end
   end
@@ -26,7 +34,7 @@ RSpec.describe WikisController, type: :controller do
 
   describe "GET #edit" do
     it "returns http success" do
-      get :edit
+      get :edit, params: {id: wiki.id }
       expect(response).to have_http_status(:success)
     end
   end
