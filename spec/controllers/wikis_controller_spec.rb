@@ -3,13 +3,16 @@ include RandomData
 
 RSpec.describe WikisController, type: :controller do
 
-  # let(:wiki) {create(:wiki) }
-  let(:user) {create(:user) }
-  let (:wiki) { Wiki.create!(title:RandomData.random_sentence, body:RandomData.random_paragraph, private:false) }
+  let(:wiki) {create(:wiki) }
+  # let(:user) {create(:user) }
+
+
+
+  # let (:wiki) { Wiki.create!(title:RandomData.random_sentence, body:RandomData.random_paragraph, private:false) }
   #
-  # before do
-  #   sign_in wiki.user
-  # end
+  before do
+    sign_in wiki.user
+  end
 
   describe "GET #index" do
     it "returns http success" do
@@ -48,14 +51,14 @@ RSpec.describe WikisController, type: :controller do
 
   describe "GET #update" do
     it "returns http success" do
-      get :update
+      get :update, params: { id: wiki.id }
       expect(response).to have_http_status(:success)
     end
   end
 
   describe "GET #destroy" do
     it "returns http success" do
-      get :destroy
+      get :destroy, params: { id: wiki.id }
       expect(response).to have_http_status(:success)
     end
   end

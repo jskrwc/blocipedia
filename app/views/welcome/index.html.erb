@@ -4,7 +4,9 @@
 <div class="jumbotron" text-center pagination-centered">
   <h3>Create and share Markdown Wikis</h3>
   <br/>
-  <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-success text-center' %>
+  <% if !user_signed_in? %>
+    <%= link_to "Sign Up", new_user_registration_path, class: 'btn btn-success text-center' %>
+  <% end %>
 </div>
 
 <div class="row">

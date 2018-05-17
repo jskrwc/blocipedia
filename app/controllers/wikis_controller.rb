@@ -22,13 +22,9 @@ class WikisController < ApplicationController
     # @wiki.title = params[:wiki][:title]
     # @wiki.body = params[:wiki][:body]
 
-# #   def create
-# #     # @wiki = Wiki.new
     # @wiki = current_user.wikis.new(wiki_params)
     @wiki = Wiki.new(wiki_params)
-# #     # @wiki.title = params[:wiki][:title]
-# #     # @wiki.body = params[:wiki][:body]
-@wiki.user = current_user
+    @wiki.user = current_user
 
 
     if wiki.save
