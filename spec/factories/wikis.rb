@@ -3,15 +3,8 @@ FactoryBot.define do
     title RandomData.random_sentence
     body RandomData.random_paragraph
     private false
-    user
-    # user create(:user)
+    # user
+    association :user, factory: :user  #factory create user was throwing error, so associate
 
-
-
-
-    # title "MyWiki Title"
-    # body "This is the Wiki body for MyWiki"
-    # private false
-    # user nil
   end
 end
