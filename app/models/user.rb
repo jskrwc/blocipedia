@@ -7,7 +7,11 @@ class User < ApplicationRecord
   has_many :wikis #, dependent: :destroy
 
   # before_save {self.role ||= :standard }
-  after_initialize {self.role ||= :standard }    #after_initialize callback - default role = standard 
+  after_initialize :init
+
+  def init
+    self.role ||= :standard     # use after_initialize callback to set default(s) for attributes, associations
+  end
 
   enum role: [:standard, :premium, :admin]
 end
