@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/stympy/faker.git
+  revision: 0373e446691d26ea979322aefb76370f3f9c380a
+  branch: master
+  specs:
+    faker (1.8.7)
+      i18n (>= 0.7)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -212,6 +220,7 @@ DEPENDENCIES
   bootstrap-sass
   devise
   factory_bot_rails
+  faker!
   figaro (= 1.0)
   jbuilder (~> 2.5)
   jquery-rails

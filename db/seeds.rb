@@ -7,16 +7,16 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 require 'random_data'
+require 'faker'
 
-  # # Create Users
-  # 5.times do
-  #   User.create!(
-  #     name:     RandomData.random_name,
-  #     email:    RandomData.random_email,
-  #     password: RandomData.random_sentence
-  #   )
-  # end
-  # users = User.all
+  # Create Users
+  5.times do
+    User.create!(
+      :email => Faker::Internet.email,
+      :password => Faker::Internet.password
+    )
+  end
+  users = User.all
 
 
  # Create Wikis
@@ -27,9 +27,10 @@ User.create(email: 'test@example.com', password: 'password')
  20.times do
  # create with bang -- ! raises error if problem w/ data we're seeding
    wiki = Wiki.create!(
-     user:  User.first,
-     title: RandomData.random_sentence,
-     body:  RandomData.random_paragraph
+     user:  users.sample,
+     :title => Faker::MostInterestingManInTheWorld.quote,
+     :body => Faker::Lorem.paragraph,
+     private: false
    )
 
    # update the time wiki created
@@ -44,22 +45,28 @@ User.create(email: 'test@example.com', password: 'password')
 # # user = User.first
 # # user.update_attributes!(
 # #   email: 'jim@knopf.io',
-# #   password: 'helloworld'
+# #   password: 'password'
 # # )
 #
-# # Create and admin user
+# # Create  admin user
 # admin = User.create!(
-#   name: 'Admin User',
 #   email:  'admin@example.com',
-#   password: 'helloworld',
+#   password: 'password',
 #   role: 'admin'
 # )
 #
-# # Create a member
-# member = User.create!(
-#   name: 'Member User',
-#   email: 'member@example.com',
-#   password: 'helloworld'
+# # Create a standard user
+# standard = User.create!(
+#   email: 'standard@example.com',
+#   password: 'password'
+#   role: 'standard'
+# )
+#
+# # Create a premium user
+# standard = User.create!(
+#   email: 'premium@example.com',
+#   password: 'password'
+#   role: 'premium'
 # )
 
  puts "Seed finished"
