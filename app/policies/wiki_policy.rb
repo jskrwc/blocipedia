@@ -1,7 +1,7 @@
 class WikiPolicy < ApplicationPolicy
 
   def index?
-    user.present?
+    true
   end
 
   def show?
@@ -9,7 +9,7 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def create?
-    false
+    user.present?
   end
 
   def new?
@@ -25,13 +25,15 @@ class WikiPolicy < ApplicationPolicy
   end
 
   def destroy?
-    true if record.user == user || user.role == "admin"
+    user == record.user || user.role == "admin"
   end
 
 
-  # class Scope < Scope
-  #   def resolve
-  #     scope
-  #   end
-  # end
+  class Scope < Scope
+    def resolve
+      scope
+    end
+  end
+
+  
 end

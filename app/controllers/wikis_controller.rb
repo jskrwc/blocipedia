@@ -2,19 +2,23 @@ class WikisController < ApplicationController
 
   def index
     @wikis = Wiki.all
+    # authorize @wiki
   end
 
   def show
     #find wiki that corresponds to id in the params passed to show, assign it to @wiki
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def new
     @wiki = Wiki.new
+    authorize @wiki
   end
 
   def edit
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
   end
 
   def create
@@ -25,6 +29,7 @@ class WikisController < ApplicationController
     @wiki = Wiki.new(wiki_params)
     @wiki.user = current_user
 
+    authorize @wiki
 
     if @wiki.save
       flash[:notice] = "Your Wiki has been created"
@@ -37,6 +42,7 @@ class WikisController < ApplicationController
 
   def update
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
     # @wiki.title = params[:wiki][:title]
     # @wiki.body = params[:wiki][:body]
     # @wiki.assign_attributes(wiki_params)  #not neede bc using @wiki.update(wiki_params) below; use if using @wiki.save below
@@ -53,6 +59,7 @@ class WikisController < ApplicationController
 
   def destroy
     @wiki = Wiki.find(params[:id])
+    authorize @wiki
 
     if @wiki.destroy
       flash[:notice] = "\"#{@wiki.title}\" was deleted successfully."

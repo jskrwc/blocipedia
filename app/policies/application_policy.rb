@@ -7,7 +7,7 @@ class ApplicationPolicy
   end
 
   def index?
-    false
+    true
   end
 
   def show?
@@ -23,7 +23,7 @@ class ApplicationPolicy
   end
 
   def update?
-    user_present?
+    false
   end
 
   def edit?
