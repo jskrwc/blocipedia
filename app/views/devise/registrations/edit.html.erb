@@ -36,7 +36,26 @@
   </div>
 <% end %>
 
-<h3>Cancel my account</h3>
+  <!-- updgrade/downgrade logic here  if standard then up etc.-->
+<% if current_user.standard? %>
+  <h3>Upgrade my account </h3>
+  <h6>Reap the benefits of a Premium membership for just $15.00</h6>
+  <%= link_to "UPRGRADE", new_charge_path, class: 'btn btn-info' %>
+  <br><br>
+<% end %>
+
+<% if current_user.premium? %>
+  <h3>Downgrade my account </h3>
+  <h6>Want to downgrade your account?  You'll no longer get premium benefits.</h6>
+  <%= link_to "Downgrade", users_downgrade_path, class: 'btn btn-info' %>
+<!-- check path  -->
+  <br><br>
+<% end %>
+
+
+
+
+<h4>Cancel my account</h4>
 
 <p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete %></p>
 
