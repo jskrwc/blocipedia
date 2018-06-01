@@ -47,8 +47,9 @@
 <% if current_user.premium? %>
   <h3>Downgrade my account </h3>
   <h6>Want to downgrade your account?  You'll no longer get premium benefits.</h6>
-  <%= link_to "Downgrade", users_downgrade_path, class: 'btn btn-info' %>
-<!-- check path  -->
+
+  <%= link_to "Downgrade", users_downgrade_path, class: 'btn btn-info', data: {confirm: "Are you sure you want to downgrade?  All your private wikis will become public."} %>
+
   <br><br>
 <% end %>
 

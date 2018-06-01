@@ -9,6 +9,27 @@
 require 'random_data'
 require 'faker'
 
+# Create  admin user
+admin = User.create!(
+  email:  'admin@example.com',
+  password: 'password',
+  role: 'admin'
+)
+
+# Create a standard user
+standard = User.create!(
+  email: 'standard@example.com',
+  password: 'password',
+  role: 'standard'
+)
+
+# Create a premium user
+premium = User.create!(
+  email: 'premium@example.com',
+  password: 'password',
+  role: 'premium'
+)
+
   # Create Users
   5.times do
     User.create!(
@@ -21,10 +42,7 @@ require 'faker'
 
  # Create Wikis
 
-# create a test user with 20 wikis
-User.create(email: 'test@example.com', password: 'password')
-
- 20.times do
+ 25.times do
  # create with bang -- ! raises error if problem w/ data we're seeding
    wiki = Wiki.create!(
      user:  users.sample,
@@ -36,38 +54,10 @@ User.create(email: 'test@example.com', password: 'password')
    # update the time wiki created
    wiki.update_attribute(:created_at, rand(10.minutes .. 1.year).ago)
 
-
  end
  wikis = Wiki.all
 
 
-# # # add me as user for test purposes
-# # user = User.first
-# # user.update_attributes!(
-# #   email: 'jim@knopf.io',
-# #   password: 'password'
-# # )
-#
-# # Create  admin user
-# admin = User.create!(
-#   email:  'admin@example.com',
-#   password: 'password',
-#   role: 'admin'
-# )
-#
-# # Create a standard user
-# standard = User.create!(
-#   email: 'standard@example.com',
-#   password: 'password'
-#   role: 'standard'
-# )
-#
-# # Create a premium user
-# standard = User.create!(
-#   email: 'premium@example.com',
-#   password: 'password'
-#   role: 'premium'
-# )
 
  puts "Seed finished"
  puts "#{User.count} users created"
