@@ -8,9 +8,9 @@
         <div class="media-body"
           <h4 class="media-heading">
             <% if wiki.private? %>
-              <p>[private] <%=  link_to wiki.title, wiki %></p>
+              <p>[private:] <%= link_to markdown(wiki.title), wiki %></p>
             <% else %>
-                <p><%=  link_to wiki.title, wiki %></p>
+                <p><%=  link_to markdown(wiki.title), wiki %></p>
             <% end %>
           </h4>
         </div>
