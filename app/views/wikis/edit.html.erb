@@ -12,5 +12,9 @@
 
   <div class="col-md-8">
       <%=render partial: 'form', locals: { wiki: @wiki } %>
+<!-- collaborators add/remove   only render if authorized*** -->
+      <%=render partial: 'collaborators/form', locals: { wiki: @wiki } %>
+      <%=render partial: 'collaborators/collaborators', locals: { wiki: @wiki }%>
+
   </div>
 </div>

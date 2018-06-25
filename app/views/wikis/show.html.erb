@@ -6,6 +6,22 @@
   </div>
 </div>
 
+<!--wiki owner  -->
+<div>
+  <h5>wiki primary author:</h5>
+  <%= @wiki.user.email %>
+</div>
+
+<!-- list collaborators -->
+<div>
+  <% if @wiki.private? %>
+    <h5>collaborators:</h5>
+    <% @wiki.users.each do |collaborator| %>
+      <h6><%= collaborator.email %></h6>
+    <% end %>
+  <% end %>
+</div>
+
 
   <%= link_to "Edit Wiki", edit_wiki_path(@wiki), class: 'btn btn-success' %>
   <%= link_to "Delete Wiki", @wiki, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure you want to delete this wiki?' } %>

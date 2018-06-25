@@ -4,8 +4,9 @@ class WikisController < ApplicationController
 
 
   def index
-    @wikis = Wiki.all
-    authorize @wikis
+    # @wikis = Wiki.all
+    @wikis = policy_scope(Wiki)
+    # authorize @wikis
   end
 
   def show
@@ -20,8 +21,12 @@ class WikisController < ApplicationController
   end
 
   def edit
-    @wiki = Wiki.find(params[:id])
+  #  @wiki = Wiki.find(params[:id])   use eager loading below
+    @wiki = Wiki.includes(:collaborators, :users).find(params[:id])
     authorize @wiki
+    current_collab_ids = @wiki.collaborators.collect(&:user_id) + [current_user.id]
+    @available_users = User.where('id NOT IN (?)', current_collab_ids)
+    # @available_users = User.all # need to remove current collabs and current user
   end
 
   def create

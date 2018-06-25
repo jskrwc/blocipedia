@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
   get 'users/downgrade'
-  # get 'users/show'        #will use later
-  # get 'downgrade/show'
+
 
   devise_for :users
 
-  resources :wikis
+  resources :wikis do
+    resources :collaborators
+  end
 
   resources :charges, only: [:new, :create]
 
